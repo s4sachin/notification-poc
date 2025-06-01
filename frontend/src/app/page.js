@@ -46,6 +46,8 @@ export default function Home() {
   const [showNotifications, setShowNotifications] = useState(false);
   const ws = useRef(null);
 
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
   // Redirect to sign-in if not authenticated
   useEffect(() => {
     if (!user) router.replace("/signin");
@@ -55,8 +57,9 @@ export default function Home() {
   useEffect(() => {
     if (!user) return;
     if (ws.current) ws.current.close();
-    // ws.current = new WebSocket(`ws://localhost:4000?userId=${user.id}`);
-    ws.current = new WebSocket(`ws://localhost:4000?userId=${user.id}`);
+    ws.current = new WebSocket(
+      `${BACKEND_URL.replace(/^http/, "ws")}?userId=${user.id}`
+    );
     ws.current.onmessage = (event) => {
       const notification = JSON.parse(event.data);
       setNotifications((prev) => [notification, ...prev]);
@@ -70,7 +73,7 @@ export default function Home() {
   }, [user]);
 
   function handleLike(post) {
-    fetch("http://localhost:4000/api/like", {
+    fetch(`${BACKEND_URL}/api/like`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
