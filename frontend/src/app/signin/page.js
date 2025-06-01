@@ -22,7 +22,7 @@ export default function Signin() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <form onSubmit={handleSignIn} className="bg-white p-8 rounded shadow-md w-80">
-        <h1 className="text-xl font-bold mb-6 text-center">Sign In</h1>
+        <h1 className="text-xl font-bold text-gray-950 mb-6 text-center">Sign In</h1>
         <label className="block mb-2 font-semibold text-gray-700">Select User:</label>
         <select name="user" className="w-full border border-gray-700 rounded px-3 py-2 mb-6 bg-white text-gray-900">
           {USERS.map(u => (

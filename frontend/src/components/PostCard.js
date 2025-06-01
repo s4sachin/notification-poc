@@ -1,4 +1,4 @@
-'use client'
+"use client";
 export default function PostCard({ post, onLike, isLiked }) {
   return (
     <div className="bg-white shadow rounded p-4 mb-4">
@@ -8,7 +8,12 @@ export default function PostCard({ post, onLike, isLiked }) {
         <span className="text-sm text-gray-500">by {post.owner}</span>
         <button
           onClick={() => onLike(post)}
-          className={`ml-auto px-3 py-1 rounded ${isLiked ? 'bg-blue-400 text-white' : 'bg-blue-100 text-blue-700'} hover:bg-blue-200`}
+          disabled={isLiked}
+          className={`ml-auto px-3 py-1 rounded ${
+            isLiked
+              ? "bg-gray-300 text-gray-400 cursor-not-allowed"
+              : "bg-blue-100 text-blue-700 hover:bg-blue-200"
+          }`}
         >
           👍 Like
         </button>
@@ -16,4 +21,3 @@ export default function PostCard({ post, onLike, isLiked }) {
     </div>
   );
 }
-  
